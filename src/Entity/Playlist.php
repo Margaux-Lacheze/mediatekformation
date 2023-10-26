@@ -101,5 +101,5 @@ class Playlist {
         }
         return $categories;
     }
-
+    
 }

@@ -56,7 +56,8 @@
                     &nbsp;
                 </th>
                 <th class="text-center align-top">
-                    Actions
+                    gestion<br />
+                    <a href="{{ path('admin.formation.ajout') }}" class="btn btn-info mb-2 btn-sm">Ajouter une formation</a>
                 </th>
             </tr>
         </thead>
@@ -81,13 +82,11 @@
                     </td>
                     <td class="text-center">
                         {% if formation.miniature %}
-                            <a href="#">
                                 <img alt="Image miniature d'une formation" src="{{ formation.miniature }}">
-                            </a>
                         {% endif %}
                     </td>
                     <td>
-                        <a href="#" class="btn btn-secondary">Editer</a>
+                        <a href="{{ path('admin.formation.edit', {id:formation.id}) }}" class="btn btn-secondary">Editer</a>
                         <a href="{{ path('admin.formation.suppr', {id:formation.id}) }}" class="btn btn-danger" onclick="return confirm('Etes-vous sûr de vouloir supprimer {{formation.title}} ?')">Supprimer</a>
                     </td>
                 </tr>

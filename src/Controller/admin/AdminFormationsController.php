@@ -79,16 +79,28 @@ class AdminFormationsController extends AbstractController {
      * @return Response
      */
     public function findAllContain($champ, Request $request, $table = ""): Response {
-        if($this->isCsrfTokenValid('filtre_' . $champ, $request->get('_token'))) {
-        $valeur = $request->get("recherche");
-        $formations = $this->formationRepository->findByContainValue($champ, $valeur, $table);
-        $categories = $this->categorieRepository->findAll();
-        return $this->render(self::TEMPLATE_FORMATIONS, [
-                    'formations' => $formations,
-                    'categories' => $categories,
-                    'valeur' => $valeur,
-                    'table' => $table
-        ]);
+        if ($table === "categories") {
+            $valeur = $request->get("recherche");
+            $formations = $this->formationRepository->findByContainValue($champ, $valeur, $table);
+            $categories = $this->categorieRepository->findAll();
+            return $this->render(self::TEMPLATE_FORMATIONS, [
+                        'formations' => $formations,
+                        'categories' => $categories,
+                        'valeur' => $valeur,
+                        'table' => $table
+            ]);
+        } else {
+            if ($this->isCsrfTokenValid('filtre_' . $champ, $request->get('_token'))) {
+                $valeur = $request->get("recherche");
+                $formations = $this->formationRepository->findByContainValue($champ, $valeur, $table);
+                $categories = $this->categorieRepository->findAll();
+                return $this->render(self::TEMPLATE_FORMATIONS, [
+                            'formations' => $formations,
+                            'categories' => $categories,
+                            'valeur' => $valeur,
+                            'table' => $table
+                ]);
+            }
         }
         return $this->redirectToRoute('admin.formations');
     }
@@ -111,19 +123,19 @@ class AdminFormationsController extends AbstractController {
      */
     public function edit(Formation $formation, Request $request): Response {
         $formFormation = $this->createForm(FormationType::class, $formation);
-        
+
         $formFormation->handleRequest($request);
-        if($formFormation->isSubmitted() && $formFormation->isValid()) {
+        if ($formFormation->isSubmitted() && $formFormation->isValid()) {
             $this->formationRepository->add($formation, true);
             return $this->redirectToRoute('admin.formations');
         }
-        
+
         return $this->render("admin/admin.formation.edit.html.twig", [
-            'formation' => $formation,
-            'formformation' => $formFormation->createView()
+                    'formation' => $formation,
+                    'formformation' => $formFormation->createView()
         ]);
     }
-    
+
     /**
      * @Route("/admin/ajout", name="admin.formation.ajout")
      * @param Request $request
@@ -132,16 +144,17 @@ class AdminFormationsController extends AbstractController {
     public function ajout(Request $request): Response {
         $formation = new Formation();
         $formFormation = $this->createForm(FormationType::class, $formation);
-        
+
         $formFormation->handleRequest($request);
-        if($formFormation->isSubmitted() && $formFormation->isValid()) {
+        if ($formFormation->isSubmitted() && $formFormation->isValid()) {
             $this->formationRepository->add($formation, true);
             return $this->redirectToRoute('admin.formations');
         }
-        
+
         return $this->render("admin/admin.formation.ajout.html.twig", [
-            'formation' => $formation,
-            'formformation' => $formFormation->createView()
+                    'formation' => $formation,
+                    'formformation' => $formFormation->createView()
         ]);
     }
+
 }

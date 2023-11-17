@@ -26,11 +26,6 @@ class AdminCategoriesController extends AbstractController {
      */
     private $categorieRepository;
 
-    /**
-     * 
-     * @var FormationRepository
-     */
-    private $formationRepository;
 
     function __construct(CategorieRepository $categorieRepository) {
         $this->categorieRepository = $categorieRepository;

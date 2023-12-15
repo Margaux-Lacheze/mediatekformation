@@ -57,6 +57,6 @@ Cette page s'affiche lorsque l'administrateur clique sur "catégories" dans le m
 ## Tester l'application en ligne
 L'application est disponible en ligne à cette adresse : http://mediatekformationlchz.go.yj.fr <br>
 La page d'authentification est disponible en rajoutant admin à l'adresse : http://mediatekformationlchz.go.yj.fr/admin <br>
-La documentation technique est disponible à cette adresse : http://mediatekformation.go.yj.fr/mediatekformation_doc
+La documentation technique est disponible à cette adresse : https://mediatekformationlchz.go.yj.fr/mediatekformation_doc/
 
 
